@@ -4,7 +4,7 @@ import axios from 'axios';
 export default function Film(props) {
   const [movie, setMovie] = useState();
 
-  let id = `${movie.id}`;
+  let id = movie.id;
   // URL'den alınan :id parametresini bu değişkene aktarın
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function Film(props) {
           // ve burdan gelen response'u 'movie' e aktarın
           console.log(response.data)
           console.log(response)
-          setMovie(response);
+          setMovie(response.data);
       })
       .catch(error => {
         console.error(error);

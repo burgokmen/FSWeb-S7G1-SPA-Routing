@@ -7,7 +7,7 @@ import FilmListesi from "./Filmler/FilmListesi";
 import Film from "./Filmler/Film";
 
 export default function App() {
-  const [saved, setSaved] = useState([{ id: "" }]); // Stretch: the ids of "saved" movies
+  const [saved, setSaved] = useState([]); // Stretch: the ids of "saved" movies
   const [movieList, setMovieList] = useState([]);
 
   useEffect(() => {
@@ -16,12 +16,12 @@ export default function App() {
         .get("http://localhost:5001/api/filmler") // Burayı Postman'le çalışın
         .then((response) => {
           // Bu kısmı log statementlarıyla çalışın
-          console.log(response);
+          console.log(response.data);
 
           /* console.log(response.data); */
 
           // ve burdan gelen response'u 'movieList' e aktarın
-          setMovieList(response);
+          setMovieList(response.data);
         })
         .catch((error) => {
           console.error("Sunucu Hatası", error);
@@ -31,7 +31,7 @@ export default function App() {
   }, []);
 
   const KaydedilenlerListesineEkle = (id) => {
-    ( !(saved.find(o => o.id === 'id'))) ? setSaved(...saved, {id:id});
+    ( !(saved.find(o => o.id === 'id'))) ? setSaved([...saved, id]);
     // Burası esnek. Aynı filmin birden fazla kez "saved" e eklenmesini engelleyin
   };
 
