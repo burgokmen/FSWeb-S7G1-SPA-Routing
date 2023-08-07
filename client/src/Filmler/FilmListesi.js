@@ -1,10 +1,17 @@
 import React from "react";
+import { useHistory } from "react-router-dom/";
+import FilmCard from "./FilmCard";
 
 export default function FilmListesi(props) {
+  const history = useHistory();
+  const { movies } = props;
+
   return (
     <div className="movie-list">
-      {props.movies.map((movie) => (
-        <FilmDetaylari key={movie.id} movie={movie} />
+      {movies?.map((movie) => (
+        <div>
+          <FilmDetaylari key={movie.id} movie={movie} />
+        </div>
       ))}
     </div>
   );

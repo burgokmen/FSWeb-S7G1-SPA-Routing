@@ -1,13 +1,29 @@
-import React from 'react';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function KaydedilenlerListesi(props) {
+  const history = useHistory();
   return (
     <div className="saved-list">
       <h3>Kaydedilen Filmler:</h3>
-      {props.list.map(movie => (
-        <span className="saved-movie">{movie.title}</span>
+      {props.list.map((movie) => (
+        <NavLink
+          to={`/filmler/${movie.id}`}
+          key={movie.id}
+          className="saved-movie"
+        >
+          {movie.title}
+        </NavLink>
       ))}
-      <div className="home-button">Anasayfa</div>
+      <button
+        className="home-button"
+        onClick={() => {
+          history.push("/");
+        }}
+      >
+        Anasayfa
+      </button>
     </div>
   );
 }
